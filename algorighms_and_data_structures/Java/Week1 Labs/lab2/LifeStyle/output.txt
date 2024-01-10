@@ -1,0 +1,7 @@
+gender: Male
+Height: 174.000000 cm
+Weight: 80.000000 kg
+smoker: No
+weeklyAlcholUnits: 0
+Recommended Weekly Alcohol Limit: 21
+restPulse: 260

@@ -7,12 +7,13 @@
  */
 public class Person
 {
-	double cmHeight ;
-	double kgWeight;
-	boolean smoker = true;
-	int weeklyAlcholUnits = 50;
+	double cmHeight=174;
+	double kgWeight=80;
+	boolean smoker = false;
+	int weeklyAlcholUnits = 0;
 	final int RWAL = 21;   //RWAL - Recommended Weekly Alcohol Limit
 	int restPulse = 260;
+	char gender = 'm'; // 'm' or 'f'
 
 	
 	public void checkPulse()
@@ -32,9 +33,34 @@ public class Person
 	
 	}
 	
+	public void checkDesirability()
+	{
+		boolean desirability;
+		desirability = cmHeight < 150 && kgWeight > 100 && smoker == true && weeklyAlcholUnits > RWAL;
+		System.out.print("Checking for desirability -- ");
+		System.out.println(desirability);
+	}
+	
 	public void displayDetails()
 	{
+		if (gender == 'm') {
+		   System.out.println(String.format("gender: %s", "Male"));
+	   } else if (gender == 'f') {
+		   System.out.println(String.format("gender: %s", "Female"));
+	   }
+		
+	   System.out.println(String.format("Height: %f cm", cmHeight));
+	   System.out.println(String.format("Weight: %f kg", kgWeight));
 	   
+	   if (smoker == true) {
+		   System.out.println(String.format("smoker: %s", "Yes"));
+	   } else {
+		   System.out.println(String.format("smoker: %s", "No"));
+	   }
+	   
+	   System.out.println(String.format("weeklyAlcholUnits: %d", weeklyAlcholUnits));
+	   System.out.println(String.format("Recommended Weekly Alcohol Limit: %d", RWAL));
+	   System.out.println(String.format("restPulse: %d", restPulse));
 	}
 	
 }
