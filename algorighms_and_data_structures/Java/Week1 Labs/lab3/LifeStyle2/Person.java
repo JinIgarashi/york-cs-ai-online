@@ -30,13 +30,37 @@ public class Person
 	
 	public void displayProfile()
 	{
-	   System.out.println("………Health Profile……");
+	   System.out.println("ï¿½ï¿½ï¿½Health Profileï¿½ï¿½");
 	   
 	   System.out.println("Healthy pulse check = " + checkPulse());
 	   System.out.print("Abusing Body = " + checkAbuser());
 	   
 	}
 	//Put curseAndSwear method here
-	
+	public void curseAndSwear()
+	{
+		int random = (int)(Math.random()*5)+1;
+		
+		switch(random) {
+		case 1:
+			System.out.println("Oh damn!! What a nuisance");
+			break;
+		case 2:
+			System.out.println("Fuck you");
+			break;
+		case 3:
+			System.out.println("Shit");
+			break;
+		case 4:
+			System.out.println("Piss off");
+			break;
+		case 5:
+			System.out.println("Dick head");
+			break;
+			
+		}
+		
+		
+	}
 	
 }

@@ -28,6 +28,13 @@ public class HiLo {
 	      int guess = sc.nextInt();
 	      
 	      //write your code below
+	      if (random < guess) {
+	    	  System.out.println("Low");
+	      } else if (random > guess) {
+	    	  System.out.println("High");
+	      } else {
+	    	  System.out.println("Hit");
+	      }
 	   
    }
    
