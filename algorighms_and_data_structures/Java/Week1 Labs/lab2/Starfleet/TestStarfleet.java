@@ -13,7 +13,8 @@ public class TestStarfleet {
 		
 		SpaceShip s=new SpaceShip();
 		s.displaySettings();
-		
+		s.setDefense();
+		s.displaySettings();
 	}
 
 }
