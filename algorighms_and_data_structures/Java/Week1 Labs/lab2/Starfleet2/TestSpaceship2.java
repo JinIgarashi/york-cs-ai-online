@@ -6,6 +6,8 @@ public class TestSpaceship2 {
 		//create a Spaceship2 object, call the displaySettings method
 		SpaceShip2 s = new SpaceShip2();
 		s.displaySettings();
+		s.promptSettings();
+		s.displaySettings();
 	}
 
 }
