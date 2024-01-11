@@ -27,5 +27,5 @@ class Circles extends JFrame {
      setSize(400, 450);
      setTitle("Circles");
      setVisible(true);
-    }         
+    }  
 }
