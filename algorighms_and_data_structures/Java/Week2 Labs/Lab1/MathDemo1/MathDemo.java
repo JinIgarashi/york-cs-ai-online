@@ -31,4 +31,35 @@ public class MathDemo
 	   System.out.println(Math.pow(base,exponent));
 	}
 	
+	public int generateLottoNumber() {
+		return (int) (Math.random() * 6) + 1;
+	}
+	
+	public int max(int... values) {
+		
+		int maxValue = -99999;
+		for (int i = 0; i < values.length; i++) {
+			int value = values[i];
+			if (i == 0 || value > maxValue) {
+				maxValue = value;
+			}
+		}
+		return maxValue;
+		
+	}
+	
+	public void bestOfThree() {
+	   Scanner sc=new Scanner(System.in);
+	   
+	   int[] values = new int[3];
+	   
+	   for (int i=0; i < values.length; i++) {
+		   System.out.println("Enter a number");
+		   values[i] = sc.nextInt();
+	   }
+	   
+	   int bestValue = max(values);
+	   System.out.println("The best of three values is " + bestValue);
+	}
+	
 }

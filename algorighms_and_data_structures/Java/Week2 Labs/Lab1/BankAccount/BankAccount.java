@@ -18,6 +18,7 @@ public class BankAccount
       System.out.println("********  Initialising Bank Account  Details *******");
       System.out.print("Please enter Name => ");
       accountHolder =sc.next();
+      setAccountHolder(accountHolder);
       System.out.print("Please enter ID => ");
       
       accountID = sc.next();
