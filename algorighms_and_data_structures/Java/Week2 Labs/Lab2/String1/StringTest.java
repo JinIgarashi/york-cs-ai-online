@@ -44,13 +44,21 @@ public class StringTest
      	System.out.println("Please enter your second string to compare:");
      	String s2 =sc.next();
         
+     	System.out.println("s1 == s2" + s1 == s2);
+     	
      	if (s1.equals(s2))
         {
           System.out.println("The strings are identical");
         }
         else
         {
-             System.out.println("The strings are NOT identical");
+             
+             if (s1.toLowerCase().equals(s2.toLowerCase())) {
+            	 System.out.println("The strings are identical if all characters are lowercase.");
+             } else {
+                 System.out.println("The strings are NOT identical"); 
+             }
+             
         }  
 
     }

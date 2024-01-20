@@ -16,10 +16,14 @@ public class Test_YorDate
 		 date1 = new YorDate();
 		
 		//Using the appropriate methods set, set date1 to your birthdate
-	
+		 date1.setDay(23);
+		 date1.setMonth(6);
+		 date1.setYear(1985);
 		
 		//Using appropriate date1 method(s) display your birthday
+		System.out.println("Your date is " + date1.toString());
 		
-		
+		YorDate date2 = new YorDate(23, 6, 1985);;
+		System.out.println("Day of the week is " + date2.getDayOfWeek());
 	}
 }
