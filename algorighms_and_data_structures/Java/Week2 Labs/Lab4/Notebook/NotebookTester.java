@@ -9,6 +9,9 @@ public class NotebookTester {
 		n.storeNote("Tuesday");
 		n.storeNote("Wednesday");
 		n.storeNote("THursday");
+		n.storeNote("Friday");
+		n.storeNote("Saturday");
+		n.storeNote("Sunday. It is the end of this week!!");
 		
 		n.showNote(2);
 		n.listNotes();
