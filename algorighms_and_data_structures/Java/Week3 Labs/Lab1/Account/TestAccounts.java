@@ -58,5 +58,14 @@ public class TestAccounts
     //Check balance
      System.out.println(ca1.toString());
      System.out.println();
+     
+     // test InterestAccount class
+     InterestAccount ia = new InterestAccount(10000, 0.25);
+     System.out.println(ia.toString());
+     ia.addMonthlyInterest();
+     System.out.println(ia.toString());
+     ia.setMonthlyInterestRate(0.1);
+     ia.addMonthlyInterest();
+     System.out.println(ia.toString());
     }
 }
