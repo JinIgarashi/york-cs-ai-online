@@ -51,6 +51,8 @@ public class ChangingFace extends Application {
 		 // create a button that will make the face smile         
 		 Button smileButton = new Button("Smile"); 
 		 
+		 Button thinkButton = new Button("Think"); 
+		 
 		 // create a button that will make the face frown         
 		 Button frownButton = new Button("Frown"); 
 	 
@@ -59,7 +61,7 @@ public class ChangingFace extends Application {
 		 buttonBox.setAlignment(Pos.CENTER); 
 		 
 		 //add the buttons to the horizontal container         
-		 buttonBox.getChildren().addAll(smileButton, frownButton);
+		 buttonBox.getChildren().addAll(smileButton, thinkButton, frownButton);
 		 
 		 // create and configure a vertical container to hold the button box and the face group         
 		 VBox root = new VBox(10); 
@@ -73,10 +75,20 @@ public class ChangingFace extends Application {
 		 Scene scene = new Scene(root, 250, 275, Color.YELLOW);
 		 
 		 // supply the code that is executed when the smile button is pressed  
-		 smileButton.setOnAction(e -> mouth.setLength(-180));
+		 smileButton.setOnAction(e -> {
+			 mouth.setLength(-180);
+			 mouth.setRadiusY(30);
+			 });
+		 
+		 thinkButton.setOnAction(e -> {
+			 mouth.setRadiusY(0);
+		 });
 		 
 		 // supply the code that is executed when the frown button is pressed   
-		 frownButton.setOnAction(e -> mouth.setLength(180)); 
+		 frownButton.setOnAction(e -> {
+			 mouth.setLength(180);
+			 mouth.setRadiusY(30);
+			 }); 
 		 
 		 // add the scene to the stage, then set the title        
 		 stage.setScene(scene);         

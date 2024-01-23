@@ -28,7 +28,16 @@
 			// create and configure a label which will cause the text to be displayed        
 			Button pushMeButton = new Button();         
 			pushMeButton.setText("Type something in the box then push me");         
-			pushMeButton.setOnAction(e -> pushMeLabel.setText("You entered: " + pushMeTextField.getText()));         
+			pushMeButton.setOnAction(e -> pushMeLabel.setText("You entered: " + pushMeTextField.getText().toUpperCase()));         
+			
+			// create label for number of letters
+			Label numberOfLettersLabel= new Label();         
+			numberOfLettersLabel.setTextFill(Color.RED);         
+			numberOfLettersLabel.setFont(Font.font("Arial", 20));
+			
+			Button numberOfLettersButton = new Button();         
+			numberOfLettersButton.setText("Get the number of letters");  
+			numberOfLettersButton.setOnAction(e -> numberOfLettersLabel.setText("Number of letters: " + pushMeLabel.getText().length()));
 			
 			// create and configure a VBox to hold our components               
 			VBox root = new VBox();         
@@ -36,11 +45,11 @@
 			root.setAlignment(Pos.CENTER); 
 			
 			//add the components to the VBox         
-			root.getChildren().addAll(pushMeTextField, pushMeButton, pushMeLabel); 
+			root.getChildren().addAll(pushMeTextField, pushMeButton, pushMeLabel, numberOfLettersButton, numberOfLettersLabel); 
 	
 	
 			// create a new scene         
-			Scene scene = new Scene(root, 350, 150);  
+			Scene scene = new Scene(root, 350, 250);  
 			
 			//add the scene to the stage, then configure the stage and make it visible        
 			stage.setScene(scene);         

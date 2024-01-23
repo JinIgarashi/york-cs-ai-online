@@ -49,6 +49,14 @@
 									{                               
 										display.setText("Length and height must be entered");                       
 									}  
+									else if (lengthField.getText().equals("0") || heightField.getText().equals("0") ) 
+									{
+										display.setText("Length and height must be entered more than 0"); 
+									}
+									else if (lengthField.getText().equals(heightField.getText())  ) 
+									{
+										display.setText("Length and height must be entered different value"); 
+									}
 									else                        
 									{     
 										//convert text input to doubles and set the length and height of the Oblong
