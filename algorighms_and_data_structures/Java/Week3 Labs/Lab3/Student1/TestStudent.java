@@ -1,3 +1,4 @@
+import phd.PhDStudent;
 
 public class TestStudent {
 

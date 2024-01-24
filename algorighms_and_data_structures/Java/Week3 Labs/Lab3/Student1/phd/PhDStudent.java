@@ -4,9 +4,9 @@
    Date:    Jan 30 2019
   Access control experiment:
  */
+package phd;
 
-
-import student.*;
+import student.Student;
 
 public class PhDStudent extends Student
 {
@@ -28,7 +28,7 @@ public class PhDStudent extends Student
 		System.out.println("Credits =" + super.credits); 
 		
 		//Try this, 
-		System.out.println("ID =" + super.id);
+		System.out.println("ID =" + super.getStudentID());
 	}
 	
 
