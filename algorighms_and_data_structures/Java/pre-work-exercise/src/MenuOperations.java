@@ -5,87 +5,46 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class RoomBookingApp {
-	
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
+/**
+ * MenuOperations class to manage each operation called from menu console.
+ */
+public class MenuOperations {
 
-		Rooms rooms = null;
-		Hashtable<String, RoomRate> roomRates = null;
-		Reservations reservations = null;
-		
-		try {
-			// Initialize Room and Room class data
-			rooms = initializeRoomData();
-			roomRates = initializeRoomRateData();
-			reservations = new Reservations(rooms, roomRates);
-		} catch (ApplicationError e) {
-			System.out.println(e.getMessage());
-		}
-		
-		int choice = -1;
-		
-		while (choice != 99) {
-			System.out.println("Menu:");
-	        System.out.println("1. Reserve a guest room");
-	        System.out.println("2. Reserve a group");
-	        System.out.println("3. Cancel a guest room");
-	        System.out.println("4. Search reservations by guest's last name");
-	        System.out.println("5. Sort all guests' reservations alphabetically by their last name");
-	        System.out.println("6. Report total income for each room class");
-	        System.out.println("7. Report all rooms availability");
-	        System.out.println("11. Set test data");
-	        System.out.println("99. Exit");
-	        System.out.print("Please enter a number: ");
-	        
-	        choice = sc.nextInt();
-	        
-	        try {
-	        
-		        switch (choice) {
-			        case 1:
-			        	reservations = reserveGuest(sc, reservations, rooms);
-		                break;
-			        case 2:
-			        	reservations = reserveGroup(sc, reservations, rooms);
-		                break;
-			        case 3:
-			        	reservations = cancelReservation(sc, reservations);
-		                break;
-			        case 4:
-			        	reservations = searchReservations(sc, reservations);
-		                break;
-			        case 5:
-			        	sortReservations(reservations);
-		                break;
-		            case 6:
-			        	reservations.reportTotalIncome();
-		                break;
-			        case 7:
-			        	reportRoomAvailability(sc, reservations, rooms);
-			        	break;
-			        case 11:
-			        	reservations = setTestData(reservations);
-			        	break;
-			        case 99:
-	                    System.out.println("Exit the app. Good bye.");
-	                    break;
-			        default:
-	                    System.out.println("Invalid menu number. Please enter it again.");
-		        }
-	        } catch (ApplicationError e) {
-	        	// if any application error occurs, show error message and go back to menu.
-				System.out.println(e.getMessage());
-			}
-		}
-		sc.close();
+	/**
+	 * Rooms class object
+	 */
+	private Rooms rooms = null;
+	
+	/**
+	 * Hashtable to manage room rates per room class
+	 * Key: room class name
+	 * Value: RoomClass object
+	 */
+	private Hashtable<String, RoomRate> roomRates = null;
+	
+	/**
+	 * Reservations class object
+	 */
+	private Reservations reservations = null;
+	
+	/**
+	 * Constructor. 
+	 * It inputs default room data and room rate data.
+	 * Furthermore, it initialize an array of Reservation objects.
+	 * @throws ApplicationError
+	 */
+	public MenuOperations() throws ApplicationError {
+		// Initialize Room and Room class data
+		rooms = this.initializeRoomData();
+		roomRates = this.initializeRoomRateData();
+		reservations = new Reservations(rooms, roomRates);
 	}
 	
 	/**
 	 * (Task 1) Store room details
 	 * @throws ApplicationError
 	 */
-	private static Rooms initializeRoomData() throws ApplicationError {
+	private Rooms initializeRoomData() throws ApplicationError {
 		Rooms rooms = new Rooms();
 		
 		Room standard = new Room(
@@ -118,7 +77,7 @@ public class RoomBookingApp {
 	/**
 	 * (Task 2) Store room rates details
 	 */
-	private static Hashtable<String, RoomRate> initializeRoomRateData() {
+	private Hashtable<String, RoomRate> initializeRoomRateData() {
 		Hashtable<String, RoomRate> roomRates = new Hashtable<String, RoomRate>();
 		
 		RoomRate standard = new RoomRate("Standard", 1000);
@@ -145,12 +104,10 @@ public class RoomBookingApp {
 	/**
 	 * (Task 4 and Task 6) Ask questions to collect information for reservation
 	 * @param sc Scanner object
-	 * @param reservations Reservations object
-	 * @param rooms Rooms object
 	 * @return Reservation object (in this stage, it is not booked yet. You have to call book method of Reservations class)
 	 * @throws ApplicationError
 	 */
-	private static Reservation askReservationQuestions(Scanner sc, Reservations reservations, Rooms rooms) throws ApplicationError {
+	private Reservation askReservationQuestions(Scanner sc) throws ApplicationError {
 		System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
 		String roomChoice = sc.next();
 
@@ -186,9 +143,9 @@ public class RoomBookingApp {
 	/**
 	 * (Task 4) reserve a guest' room
 	 */
-	private static Reservations reserveGuest(Scanner sc, Reservations reservations, Rooms rooms) throws ApplicationError {
+	public void reserveGuest(Scanner sc) throws ApplicationError {
 		
-		Reservation reservation = askReservationQuestions(sc, reservations, rooms);
+		Reservation reservation = this.askReservationQuestions(sc);
 		reservations.book(reservation);
 		
 		System.out.println(String.format("The room of %s was reserved as follows:", reservation.getRoomNumber()));
@@ -198,15 +155,14 @@ public class RoomBookingApp {
 		System.out.println("Do you wish to reserve another room? Select Yes (Y) or No (N): ");
 		String answer = sc.next();
 		if (answer.toLowerCase().equals("y")) {
-			return reserveGuest(sc, reservations, rooms);
+			this.reserveGuest(sc);
 		}
-		return reservations;
 	}
 	
 	/**
 	 * (Task 4) Cancel a room reservation
 	 */
-	private static Reservations cancelReservation(Scanner sc, Reservations reservations) throws ApplicationError {
+	public void cancelReservation(Scanner sc) throws ApplicationError {
 		System.out.println("Enter the choice of class (Standard, Deluxe, Superior):");
 		String roomChoice = sc.next();
 		
@@ -227,13 +183,12 @@ public class RoomBookingApp {
 		System.out.println("The following reservation was cancelled successfully.");
 		Reservation.printHeader();
 		deleted.print();
-		return reservations;
 	}
 	
 	/**
 	 * (Task 5) search reservations by a guest's last name
 	 */
-	private static Reservations searchReservations(Scanner sc, Reservations reservations) throws ApplicationError {
+	public void searchReservations(Scanner sc) throws ApplicationError {
 		System.out.print("Enter the guest’s last name: ");
 		String lastName = sc.next();
 	
@@ -247,13 +202,12 @@ public class RoomBookingApp {
 		for (Reservation r : result) {
 			r.print();
 		}
-		return reservations;
 	}
 	
 	/**
 	 * (Task 6) Reserve a group
 	 */
-	private static Reservations reserveGroup(Scanner sc, Reservations reservations, Rooms rooms) throws ApplicationError {
+	public void reserveGroup(Scanner sc) throws ApplicationError {
 		
 		int numberOfRooms = 0;
 		while (numberOfRooms == 0) {
@@ -270,7 +224,7 @@ public class RoomBookingApp {
 		for (int i = 0; i < numberOfRooms; i++) {
 			System.out.println(String.format("#%d reservation details: ", i + 1));
 			
-			Reservation reservation = askReservationQuestions(sc, reservations, rooms);
+			Reservation reservation = askReservationQuestions(sc);
 			reservations.book(reservation);
 			result.add(reservation);
 		}
@@ -281,14 +235,16 @@ public class RoomBookingApp {
 		for (Reservation r : result) {
 			r.print();
 		}
-		
-		return reservations;
+	}
+	
+	public void reportTotalIncome() {
+		reservations.reportTotalIncome();
 	}
 	
 	/**
 	 * (Task 8) Sort all guests' reservations alphabetically
 	 */
-	private static void sortReservations(Reservations reservations) {
+	public void sortReservations() {
 		Reservation[] sorted = reservations.sortByLastName(false);
 		Reservation.printHeader();
 		for (Reservation r: sorted) {
@@ -299,7 +255,7 @@ public class RoomBookingApp {
 	/**
 	 * (Task 9) Report room availability for selected room class
 	 */
-	private static void reportRoomAvailability(Scanner sc, Reservations reservations, Rooms rooms) {
+	public void reportRoomAvailability(Scanner sc) {
 		String roomChoice = "";
 		
 		while(true) {
@@ -318,7 +274,7 @@ public class RoomBookingApp {
 	/**
 	 * prepare initial reservations data for testing
 	 */
-	private static Reservations setTestData(Reservations reservations) throws ApplicationError {
+	public void setTestData() throws ApplicationError {
 		Reservation r1 = new Reservation("Qazi", "Zubair", 1, "Deluxe", "Queen-size");
 		Reservation r2 = new Reservation("Oliver", "Barker", 3, "Superior", "King-size");
 		Reservation r3 = new Reservation("Akram", "Khan", 20, "Standard", "Double");
@@ -331,6 +287,6 @@ public class RoomBookingApp {
 			reservations.book(items.get(i));
 		}
 		reservations.print();
-		return reservations;
 	}
+
 }

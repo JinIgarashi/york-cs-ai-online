@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -264,6 +263,9 @@ public class Reservations {
         return outputs;
 	}
 	
+	/**
+	 * Print reservations details to the console
+	 */
 	public void print() {
 		Reservation.printHeader();
 		for (int i = 0; i < reservations.size(); i++) {

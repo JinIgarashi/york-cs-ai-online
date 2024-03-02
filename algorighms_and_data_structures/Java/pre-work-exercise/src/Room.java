@@ -5,9 +5,24 @@ import java.util.ArrayList;
  */
 public class Room {
 
+	/**
+	 * Room class name
+	 */
 	private String roomClass;
+	
+	/**
+	 * Room class description
+	 */
 	private String description;
+	
+	/**
+	 * The range of room numbers available for the class
+	 */
 	private ArrayList<Integer> roomNumbers;
+	
+	/**
+	 * The options for bed types available for the class
+	 */
 	private ArrayList<String> bedTypes;
 	
 	/**

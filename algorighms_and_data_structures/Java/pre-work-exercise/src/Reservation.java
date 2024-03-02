@@ -3,11 +3,34 @@
  */
 public class Reservation {
 
+	/**
+	 * guest's first name
+	 */
 	private String firstName;
+	
+	/**
+	 * guest's last name
+	 */
 	private String lastName;
+	
+	/**
+	 * length of stay (nights)
+	 */
 	private Integer lengthOfStay;
+	
+	/**
+	 * Room number reserved
+	 */
 	private Integer roomNumber;
+	
+	/**
+	 * guest's room class chosen
+	 */
 	private String roomChoice;
+	
+	/**
+	 * guest's bed type choice
+	 */
 	private String bedChoice;
 	
 	/**

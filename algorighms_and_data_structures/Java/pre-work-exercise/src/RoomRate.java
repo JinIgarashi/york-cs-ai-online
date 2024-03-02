@@ -3,8 +3,15 @@
  */
 public class RoomRate {
 
-	String roomClass;
-	Integer rate;
+	/**
+	 * Room class name
+	 */
+	private String roomClass;
+	
+	/**
+	 * Room rate
+	 */
+	private Integer rate;
 	
 	/**
 	 * Constructor
