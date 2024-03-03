@@ -34,6 +34,10 @@ public class Rooms {
 			throw new ApplicationError("Room numbers have to be 2 elements like 1 to 100");
 		}
 		
+		if (numbers.get(0) == numbers.get(1) ) {
+			throw new ApplicationError("room numbers from and to cannot be the same");
+		}
+		
 		if (!this.validateRoomNumbers(room)) {
 			throw new ApplicationError("Room number " + numbers.get(0) + " to " + numbers.get(1) + " are already occupied by other room classes.");
 		}

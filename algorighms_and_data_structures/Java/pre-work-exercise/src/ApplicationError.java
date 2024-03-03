@@ -4,9 +4,9 @@
  */
 public class ApplicationError extends Exception {
 
-	public ApplicationError() {
-		// TODO Auto-generated constructor stub
-	}
+	private static final long serialVersionUID = 1L;
+
+	public ApplicationError() {}
 
 	public ApplicationError(String message) {
 		super(message);

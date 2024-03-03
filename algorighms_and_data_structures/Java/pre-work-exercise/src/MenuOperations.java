@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 /**
  * MenuOperations class to manage each operation called from menu console.
+ * This class's methods can interact with users by using Scanner object.
  */
 public class MenuOperations {
 
@@ -107,21 +108,32 @@ public class MenuOperations {
 	 * @return Reservation object (in this stage, it is not booked yet. You have to call book method of Reservations class)
 	 * @throws ApplicationError
 	 */
-	private Reservation askReservationQuestions(Scanner sc) throws ApplicationError {
-		System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
-		String roomChoice = sc.next();
+	private Reservation askReservationQuestions(Scanner sc){
+		String roomChoice = "";
+		while(true) {
+			System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
+			roomChoice = sc.next();
 
-		Room room = rooms.get(roomChoice);
-		if (room == null) {
-			throw new ApplicationError("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
+			if (rooms.get(roomChoice) == null) {
+				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
+			} else {
+				break;
+			}
 		}
+		Room room = rooms.get(roomChoice);
 		
 		ArrayList<String> bedTypes = room.getBedTypes();
-		System.out.print(String.format("Enter the choice of bed type (%s): ", String.join(", ", bedTypes)));
-		String bedChoice = sc.next();
-		if (bedTypes.indexOf(bedChoice) == -1) {
-			throw new ApplicationError("Invalid bed type. please select from available bed types");
+		String bedChoice = "";
+		while(true) {
+			System.out.print(String.format("Enter the choice of bed type (%s): ", String.join(", ", bedTypes)));
+			bedChoice = sc.next();
+			if (bedTypes.indexOf(bedChoice) == -1) {
+				System.out.println("Invalid bed type. please select from available bed types");
+			} else {
+				break;
+			}
 		}
+		
 		
 		System.out.print("Enter the guest's first name: ");
 		String firstName = sc.next();
@@ -129,10 +141,15 @@ public class MenuOperations {
 		System.out.print("Enter the guest's last name: ");
 		String lastName = sc.next();
 		
-		System.out.print("Enter the length of stay (in nights): ");
-		Integer lengthOfStay = sc.nextInt();
-		if (lengthOfStay < 1 ) {
-			throw new ApplicationError("Please enter length of stay more than a night");
+		Integer lengthOfStay = 0;
+		while (true) {
+			System.out.print("Enter the length of stay (in nights): ");
+			lengthOfStay = sc.nextInt();
+			if (lengthOfStay < 1 ) {
+				System.out.println("Please enter length of stay more than a night");
+			} else {
+				break;
+			}
 		}
 		
 		Reservation reservation = new Reservation(firstName, lastName, lengthOfStay, roomChoice, bedChoice);
@@ -148,23 +165,40 @@ public class MenuOperations {
 		Reservation reservation = this.askReservationQuestions(sc);
 		reservations.book(reservation);
 		
-		System.out.println(String.format("The room of %s was reserved as follows:", reservation.getRoomNumber()));
+		System.out.println(String.format("The room number %s was reserved as follows:", reservation.getRoomNumber()));
 		Reservation.printHeader();
 		reservation.print();
 		
-		System.out.println("Do you wish to reserve another room? Select Yes (Y) or No (N): ");
-		String answer = sc.next();
-		if (answer.toLowerCase().equals("y")) {
-			this.reserveGuest(sc);
+		System.out.print("Do you wish to reserve another room? Select Yes (Y) or No (N): ");
+		while (true) {
+			String answer = sc.next();
+			if (answer.toLowerCase().equals("y") || answer.toLowerCase().equals("yes")) {
+				this.reserveGuest(sc);
+			} else if (answer.toLowerCase().equals("n") || answer.toLowerCase().equals("no")) {
+				System.out.println("Single reservation menu ended.");
+				break;
+			} else {
+				System.out.println("Please enter your answer either Yes (Y) or No (N): ");
+			}
 		}
+		
 	}
 	
 	/**
 	 * (Task 4) Cancel a room reservation
 	 */
 	public void cancelReservation(Scanner sc) throws ApplicationError {
-		System.out.println("Enter the choice of class (Standard, Deluxe, Superior):");
-		String roomChoice = sc.next();
+		String roomChoice = "";
+		while(true) {
+			System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
+			roomChoice = sc.next();
+
+			if (rooms.get(roomChoice) == null) {
+				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
+			} else {
+				break;
+			}
+		}
 		
 		System.out.print("Enter the room number: ");
 		Integer roomNumber = sc.nextInt();
@@ -172,8 +206,16 @@ public class MenuOperations {
 		System.out.print("Enter the guest’s last name: ");
 		String lastName = sc.next();
 		
-		System.out.print("Enter the length of stay (nights): ");
-		Integer lengthOfStay = sc.nextInt();
+		Integer lengthOfStay = 0;
+		while (true) {
+			System.out.print("Enter the length of stay (in nights): ");
+			lengthOfStay = sc.nextInt();
+			if (lengthOfStay < 1 ) {
+				System.out.println("Please enter length of stay more than a night");
+			} else {
+				break;
+			}
+		}
 		
 		Reservation deleted = reservations.cancel(roomChoice, roomNumber, lastName, lengthOfStay);
 		if (deleted == null) {
@@ -237,6 +279,9 @@ public class MenuOperations {
 		}
 	}
 	
+	/**
+	 * (Task 7) report total income calculated from reservations
+	 */
 	public void reportTotalIncome() {
 		reservations.reportTotalIncome();
 	}
