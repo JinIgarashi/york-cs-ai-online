@@ -120,7 +120,7 @@ public class Reservation {
 			this.lengthOfStay, 
 			this.roomNumber, 
 			// capitalize first letter
-			this.roomChoice.substring(0, 1).toUpperCase() + this.roomChoice.substring(1),
+			Utils.toCapitalize(this.roomChoice),
 			this.bedChoice
 		);
 		System.out.println();

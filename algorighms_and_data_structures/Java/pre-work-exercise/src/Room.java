@@ -87,7 +87,7 @@ public class Room {
 		System.out.printf(
 			"| %10s | %50s | %15s | %25s |", 
 			// capitalize first letter
-			this.roomClass.substring(0, 1).toUpperCase() + this.roomClass.substring(1), 
+			Utils.toCapitalize(this.roomClass), 
 			this.description, 
 			sbRoomNumbers.toString(), 
 			String.join(", ", this.bedTypes)

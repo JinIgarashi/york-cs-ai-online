@@ -47,7 +47,7 @@ public class RoomRate {
 		System.out.printf(
 			"| %10s | %10s |", 
 			// capitalize first letter
-			this.roomClass.substring(0, 1).toUpperCase() + this.roomClass.substring(1), 
+			Utils.toCapitalize(this.roomClass), 
 			this.rate
 		);
 		System.out.println();
