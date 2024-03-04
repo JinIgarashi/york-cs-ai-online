@@ -19,7 +19,8 @@ public class RoomRate {
 	 * @param rate room rate
 	 */
 	public RoomRate(String roomClass, Integer rate) {
-		this.roomClass = roomClass;
+		// change character to lower case. so either Standard, standard, STANDARD will be accepted
+		this.roomClass = roomClass.toLowerCase();
 		this.rate = rate;
 	}
 	
@@ -45,7 +46,8 @@ public class RoomRate {
 	public void print() {
 		System.out.printf(
 			"| %10s | %10s |", 
-			this.roomClass, 
+			// capitalize first letter
+			this.roomClass.substring(0, 1).toUpperCase() + this.roomClass.substring(1), 
 			this.rate
 		);
 		System.out.println();

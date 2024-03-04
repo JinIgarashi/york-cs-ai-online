@@ -112,7 +112,7 @@ public class MenuOperations {
 		String roomChoice = "";
 		while(true) {
 			System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
-			roomChoice = sc.next();
+			roomChoice = sc.next().toLowerCase();
 
 			if (rooms.get(roomChoice) == null) {
 				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
@@ -191,7 +191,7 @@ public class MenuOperations {
 		String roomChoice = "";
 		while(true) {
 			System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
-			roomChoice = sc.next();
+			roomChoice = sc.next().toLowerCase();
 
 			if (rooms.get(roomChoice) == null) {
 				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
@@ -305,7 +305,7 @@ public class MenuOperations {
 		
 		while(true) {
 			System.out.print("Enter the choice of class (Standard, Deluxe, Superior):");
-			roomChoice = sc.next();
+			roomChoice = sc.next().toLowerCase();
 			
 			if (rooms.get(roomChoice) == null) {
 				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");

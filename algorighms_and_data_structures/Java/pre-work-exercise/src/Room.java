@@ -33,7 +33,8 @@ public class Room {
 	 * @param bedTypes Available bed types in an array
 	 */
 	public Room(String roomClass, String description, ArrayList<Integer> roomNumbers, ArrayList<String> bedTypes) {
-		this.roomClass = roomClass;
+		// change character to lower case. so either Standard, standard, STANDARD will be accepted
+		this.roomClass = roomClass.toLowerCase();
 		this.description = description;
 		this.roomNumbers = roomNumbers;
 		this.bedTypes = bedTypes;
@@ -85,7 +86,8 @@ public class Room {
 		
 		System.out.printf(
 			"| %10s | %50s | %15s | %25s |", 
-			this.roomClass, 
+			// capitalize first letter
+			this.roomClass.substring(0, 1).toUpperCase() + this.roomClass.substring(1), 
 			this.description, 
 			sbRoomNumbers.toString(), 
 			String.join(", ", this.bedTypes)

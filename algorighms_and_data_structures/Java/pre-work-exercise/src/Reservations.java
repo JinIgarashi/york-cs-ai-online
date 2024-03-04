@@ -164,7 +164,7 @@ public class Reservations {
             
             System.out.printf(
     			"| %8s | %15d | %15d | %22d |", 
-    			roomClass, 
+    			roomClass.substring(0, 1).toUpperCase() + roomClass.substring(1), 
     			numberOfRooms,
     			lengthOfStays, 
     			totalIncome
@@ -216,7 +216,7 @@ public class Reservations {
         
         System.out.printf(
 			"| %8s | %24d | %25d | %5d |", 
-			roomChoice, 
+			roomChoice.substring(0, 1).toUpperCase() + roomChoice.substring(1), 
 			roomStats[0],
 			roomStats[1], 
 			roomStats[2]

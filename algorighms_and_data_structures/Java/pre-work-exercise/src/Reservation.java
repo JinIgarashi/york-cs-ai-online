@@ -50,7 +50,7 @@ public class Reservation {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.lengthOfStay = lengthOfStay;
-		this.roomChoice = roomChoice;
+		this.roomChoice = roomChoice.toLowerCase();
 		this.bedChoice = bedChoice;
 	}
 	
@@ -119,7 +119,8 @@ public class Reservation {
 			this.lastName, 
 			this.lengthOfStay, 
 			this.roomNumber, 
-			this.roomChoice, 
+			// capitalize first letter
+			this.roomChoice.substring(0, 1).toUpperCase() + this.roomChoice.substring(1),
 			this.bedChoice
 		);
 		System.out.println();
