@@ -124,13 +124,18 @@ public class MenuOperations {
 		
 		ArrayList<String> bedTypes = room.getBedTypes();
 		String bedChoice = "";
-		while(true) {
-			System.out.print(String.format("Enter the choice of bed type (%s): ", String.join(", ", bedTypes)));
-			bedChoice = sc.next();
-			if (bedTypes.indexOf(bedChoice) == -1) {
-				System.out.println("Invalid bed type. please select from available bed types");
-			} else {
-				break;
+		if (bedTypes.size() == 1) {
+			bedChoice = bedTypes.get(0);
+			System.out.println("Bed type: " + bedChoice);
+		} else {
+			while(true) {
+				System.out.print(String.format("Enter the choice of bed type (%s): ", String.join(", ", bedTypes)));
+				bedChoice = sc.next();
+				if (bedTypes.indexOf(bedChoice) == -1) {
+					System.out.println("Invalid bed type. please select from available bed types");
+				} else {
+					break;
+				}
 			}
 		}
 		
