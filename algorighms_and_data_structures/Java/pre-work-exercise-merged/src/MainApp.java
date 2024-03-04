@@ -104,6 +104,30 @@ class ApplicationError extends Exception {
 
 }
 
+/**
+ * Util class to manage utilized methods
+ */
+class Utils {
+	
+	/**
+	 * Transform the first letter of string to capitalize
+	 * @param value string value
+	 * @return capitalized string value
+	 */
+	public static String toCapitalize(String value) {
+		if (value.isEmpty()) {
+			return "";
+		}
+		value = value.toLowerCase();
+		
+		if (value.length() == 1) {
+			return value.substring(0, 1).toUpperCase();
+		} else {
+			return value.substring(0, 1).toUpperCase() + value.substring(1);
+		}
+	}
+}
+
 
 /**
  * MenuOperations class to manage each operation called from menu console.
@@ -212,7 +236,7 @@ class MenuOperations {
 		String roomChoice = "";
 		while(true) {
 			System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
-			roomChoice = sc.next();
+			roomChoice = sc.next().toLowerCase();
 
 			if (rooms.get(roomChoice) == null) {
 				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
@@ -224,13 +248,18 @@ class MenuOperations {
 		
 		ArrayList<String> bedTypes = room.getBedTypes();
 		String bedChoice = "";
-		while(true) {
-			System.out.print(String.format("Enter the choice of bed type (%s): ", String.join(", ", bedTypes)));
-			bedChoice = sc.next();
-			if (bedTypes.indexOf(bedChoice) == -1) {
-				System.out.println("Invalid bed type. please select from available bed types");
-			} else {
-				break;
+		if (bedTypes.size() == 1) {
+			bedChoice = bedTypes.get(0);
+			System.out.println("Bed type: " + bedChoice);
+		} else {
+			while(true) {
+				System.out.print(String.format("Enter the choice of bed type (%s): ", String.join(", ", bedTypes)));
+				bedChoice = sc.next();
+				if (bedTypes.indexOf(bedChoice) == -1) {
+					System.out.println("Invalid bed type. please select from available bed types");
+				} else {
+					break;
+				}
 			}
 		}
 		
@@ -291,7 +320,7 @@ class MenuOperations {
 		String roomChoice = "";
 		while(true) {
 			System.out.print("Enter the choice of class (Standard, Deluxe, Superior): ");
-			roomChoice = sc.next();
+			roomChoice = sc.next().toLowerCase();
 
 			if (rooms.get(roomChoice) == null) {
 				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
@@ -405,7 +434,7 @@ class MenuOperations {
 		
 		while(true) {
 			System.out.print("Enter the choice of class (Standard, Deluxe, Superior):");
-			roomChoice = sc.next();
+			roomChoice = sc.next().toLowerCase();
 			
 			if (rooms.get(roomChoice) == null) {
 				System.out.println("Invalid room type. Please select it from (Standard, Deluxe, Superior)");
@@ -436,6 +465,7 @@ class MenuOperations {
 
 }
 
+
 /**
  * RoomRate class to manage a room's rate
  */
@@ -457,7 +487,8 @@ class RoomRate {
 	 * @param rate room rate
 	 */
 	public RoomRate(String roomClass, Integer rate) {
-		this.roomClass = roomClass;
+		// change character to lower case. so either Standard, standard, STANDARD will be accepted
+		this.roomClass = roomClass.toLowerCase();
 		this.rate = rate;
 	}
 	
@@ -483,7 +514,8 @@ class RoomRate {
 	public void print() {
 		System.out.printf(
 			"| %10s | %10s |", 
-			this.roomClass, 
+			// capitalize first letter
+			Utils.toCapitalize(this.roomClass), 
 			this.rate
 		);
 		System.out.println();
@@ -536,7 +568,8 @@ class Room {
 	 * @param bedTypes Available bed types in an array
 	 */
 	public Room(String roomClass, String description, ArrayList<Integer> roomNumbers, ArrayList<String> bedTypes) {
-		this.roomClass = roomClass;
+		// change character to lower case. so either Standard, standard, STANDARD will be accepted
+		this.roomClass = roomClass.toLowerCase();
 		this.description = description;
 		this.roomNumbers = roomNumbers;
 		this.bedTypes = bedTypes;
@@ -588,7 +621,8 @@ class Room {
 		
 		System.out.printf(
 			"| %10s | %50s | %15s | %25s |", 
-			this.roomClass, 
+			// capitalize first letter
+			Utils.toCapitalize(this.roomClass), 
 			this.description, 
 			sbRoomNumbers.toString(), 
 			String.join(", ", this.bedTypes)
@@ -611,6 +645,7 @@ class Room {
 	}
 
 }
+
 
 /**
  * Rooms class manages Room object in Hashtable by adding, getting and validate room numbers for input.
@@ -734,6 +769,7 @@ class Rooms {
 
 }
 
+
 /**
  * Reservation class to manage a room's reservation detail
  */
@@ -786,7 +822,7 @@ class Reservation {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.lengthOfStay = lengthOfStay;
-		this.roomChoice = roomChoice;
+		this.roomChoice = roomChoice.toLowerCase();
 		this.bedChoice = bedChoice;
 	}
 	
@@ -855,7 +891,8 @@ class Reservation {
 			this.lastName, 
 			this.lengthOfStay, 
 			this.roomNumber, 
-			this.roomChoice, 
+			// capitalize first letter
+			Utils.toCapitalize(this.roomChoice),
 			this.bedChoice
 		);
 		System.out.println();
@@ -878,6 +915,7 @@ class Reservation {
 	}
 
 }
+
 
 /**
  * Reservations class to manage room booking details
@@ -1038,7 +1076,7 @@ class Reservations {
             
             System.out.printf(
     			"| %8s | %15d | %15d | %22d |", 
-    			roomClass, 
+    			Utils.toCapitalize(roomClass), 
     			numberOfRooms,
     			lengthOfStays, 
     			totalIncome
@@ -1090,7 +1128,7 @@ class Reservations {
         
         System.out.printf(
 			"| %8s | %24d | %25d | %5d |", 
-			roomChoice, 
+			Utils.toCapitalize(roomChoice), 
 			roomStats[0],
 			roomStats[1], 
 			roomStats[2]
